@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Konva-histogramChart</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+    </style>
+    <script src="../konva.min.js"></script>
+    <script src="histogramChart.js"></script>
+</head>
+
+<body>
+<div id="canvas">
+</div>
+<script>
+    var stage = new Konva.Stage({
+        container:'canvas',
+        width:window.innerWidth,
+        height:window.innerHeight
+    })
+    var bgLayer = new Konva.Layer();
+    stage.add(bgLayer);
+
+    var x0 = stage.width()/8;
+    var y0 = stage.height()*3/4;
+    var width = stage.width()*3/4;
+    var height = stage.height()/2;
+
+    var line = new Konva.Line({
+        points:[x0,y0,x0+width,y0],
+        stroke:'lightgreen',
+        strokeWidth:2
+    })
+    bgLayer.add(line);
+    bgLayer.draw();
+
+    var contentLayer = new Konva.Layer();
+    stage.add(contentLayer);
+    var data = [
+        { name: '前端', value: '.8', color: 'green'},
+        { name: 'PHP', value: '.3', color: 'blue'},
+        { name: 'Java', value: '.7', color: 'red'},
+        { name: 'UI', value: '.9', color: 'orange'},
+        { name: 'IOS', value: '.4', color: 'purple'},
+        { name: 'Android', value: '.9', color: 'pink'}
+    ];
+
+    var his = new HistogramChart({
+        x:x0,
+        y:y0,
+        w:width,
+        h:height,
+        data:data
+    })
+    his.addLayer(contentLayer);
+    contentLayer.draw();
+    stage.on('contentClick', function () {
+        his.player();
+    })
+
+
+</script>
+</body>
+
+</html>
+
+<!--
+
+-->
+

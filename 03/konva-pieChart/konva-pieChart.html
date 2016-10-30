@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Konva-PieChart</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+    </style>
+    <script src="../konva.min.js"></script>
+    <script src="pieChart.js"></script>
+</head>
+
+<body>
+<div id="canvas">
+</div>
+<script>
+    var stage = new Konva.Stage({
+        container:'canvas',
+        width:window.innerWidth,
+        height:window.innerHeight
+    })
+    var bgLayer = new Konva.Layer();
+    stage.add(bgLayer);
+
+    var cenX = stage.width()/2;
+    var cenY = stage.height()/2;
+    console.log(cenY);
+
+    var circle = new Konva.Circle({
+        x:cenX,
+        y:cenY,
+        radius:110,
+        strokeWidth:2,
+        stroke:'#ccc'
+    })
+    bgLayer.add(circle);
+    bgLayer.draw();
+
+    var contentLayer = new Konva.Layer();
+    stage.add(contentLayer);
+    var data = [
+        { name: "前端", value: .25, color: '#e0e'  },
+        { name: "php",  value: .2,  color: 'orange'},
+        { name: "UI",	value: .3,	color: 'blue'  },
+        { name: "C++",	value: .05,	color: 'green' },
+        { name: "游戏",	value: .1,	color: 'purple'},
+        { name: "Java",	value: .1,	color: 'red'   }
+    ];
+    var pie  = new PieChart({
+        x:cenX,
+        y:cenY,
+        r:100,
+        data:data
+    })
+    pie.addLayer(contentLayer);
+    contentLayer.draw();
+
+    stage.on('contentClick', function () {
+        pie.player();
+    })
+
+
+
+</script>
+</body>
+
+</html>

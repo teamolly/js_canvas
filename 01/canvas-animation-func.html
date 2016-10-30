@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="demo">
+
+    </canvas>
+    <button id="one">前</button>
+    <button id="two">后</button>
+    <button id="three">左</button>
+    <button id="four">右</button>
+</div>
+<script>
+    (function () {
+        var canvas = document.getElementById('demo');
+        var ctx = canvas.getContext('2d');
+        canvas.style.border = '1px solid red';
+        canvas.height = 600;
+        canvas.width = 600;
+        var forward  = document.querySelector("#one");
+        var back = document.querySelector("#two");
+        var three = document.querySelector("#three");
+        var four = document.querySelector(("#four"));
+        function Sprite(option){
+            this._init(option);
+        }
+        Sprite.prototype = {
+            _init: function (option) {
+                this.x = option.x || 40;
+                this.y = option.y || 65;
+                this.x0 = option.x0 = option.x0 === 0? 0: (option.x0 || 10);
+                this.y0 = option.y0 = option.y0 === 0? 0: (option.y0 || 10);
+                this.w = option.w || 40;
+                this.h = option.h || 65;
+                this._imgSrc = option.imgSrc || '';
+                this.fps =  option.fps || 10;
+                this._dirIndex = 0;
+            },
+            changeDir: function (dir) {
+                switch(dir){
+                    case 'forward':
+                        this._dirIndex = 0;
+                        break;
+                    case 'left':
+                        this._dirIndex = 1;
+                        break;
+                    case 'right':
+                        this._dirIndex = 2;
+                        break;
+                    case 'back':
+                        this._dirIndex = 3;
+                        break;
+                }
+            },
+            render: function (ctx) {
+                var img = new Image();
+                img.src = this._imgSrc;
+                var self = this;
+
+                img.onload = function () {
+                    var frameIndex = 0;
+                    setInterval(function () {
+                        ctx.clearRect( 0,0 , ctx.canvas.width , ctx.canvas.height);
+                        ctx.drawImage(img,
+                                frameIndex*40,self._dirIndex*65,
+                                self.x, self.y,
+                                self.x0,self.y0,
+                                self.w,self.h
+                        );
+                        frameIndex ++;
+                        frameIndex %= 4;
+                    },1000/self.fps);
+                }
+            }
+
+        }
+        var spr = new Sprite({
+            imgSrc : 'imgs/gameImgs/DMMban.png',
+            x:40,
+            y:65,
+            x0:300,
+            y0:300,
+            w:80,
+            h:130,
+            fps:5,
+            _dirIndex:2
+        });
+        spr.render(ctx);
+        var forward  = document.querySelector("#one");
+        var back = document.querySelector("#two");
+        var left = document.querySelector("#three");
+        var right = document.querySelector(("#four"));
+        forward.onclick = function () {
+            spr.changeDir('forward');
+        }
+        back.onclick = function () {
+            spr.changeDir('back');
+        }
+        left.onclick = function () {
+            spr.changeDir('left');
+        }
+        right.onclick = function () {
+            spr.changeDir('right');
+        }
+    })();
+</script>
+</body>
+</html>

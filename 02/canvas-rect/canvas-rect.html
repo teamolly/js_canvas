@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+    <script src="../canvas-canvas-drawimg/rect.js"></script>
+</head>
+<body>
+<div>
+    <canvas id="canvas">
+
+    </canvas>
+    <img src="" id="imgId" alt="">
+</div>
+<script>
+    var canvas = document.querySelector("#canvas");
+    canvas.style.border = '1px solid red';
+    canvas.width = 600;
+    canvas.height = 600;
+    var ctx = canvas.getContext('2d');
+    var rec = new Rect({
+        x:200,y:200,
+        w:100,h:100,
+        strokeStyle:'blue',
+        fillStyle:'green',
+        rotateAngle:Math.PI/3,
+        scaleX:1.5,scaleY:1.5
+    })
+    setInterval(function () {
+        ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+        rec.x += 10;
+        rec.render(ctx);
+        var img = document.getElementById('imgId');
+        img.src = canvas.toDataURL('image/png',0.5);
+    },100)
+
+</script>
+</body>
+</html>

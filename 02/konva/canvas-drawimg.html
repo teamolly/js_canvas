@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas-drawImg</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+    <script src="konva.js"></script>
+</head>
+<body>
+<div id="canvas">
+
+</div>
+<script>
+    //第一步：创建舞台
+    var stage = new Konva.Stage({
+        container:canvas,
+        width:600,
+        height:600
+
+    });
+
+    // 第二步：创建层，并添加到舞台里
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    //第三步：创建图形并添加到层内
+    var rect = new Konva.Rect({
+        x:300,y:200,
+        opacity:0.5,
+        rotation:120,
+        width:200,
+        height:100,
+        draggable:true,
+        fill:'orange',
+        scaleX:1.5,
+        scaleY:1.5
+    })
+    layer.add(rect);
+
+    //第四步:层进行渲染
+    layer.draw();
+
+
+</script>
+</body>
+</html>

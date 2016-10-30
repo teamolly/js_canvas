@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas-tangle</title>
+</head>
+<body>
+    <div>
+        <canvas id="demo">
+
+        </canvas>
+    </div>
+    <script>
+        (function () {
+            var canvas = document.querySelector("#demo");
+            canvas.style.border = '1px solid red';
+            canvas.width = 600;
+            canvas.height = 600;
+            var ctx = canvas.getContext('2d');
+            ctx.rect(100,100,100,200);
+            ctx.fillStyle = "red";
+            ctx.stroke();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.strokeStyle = "green";
+            ctx.strokeRect(200,150,200,200);
+            ctx.beginPath();
+            ctx.fillStyle = "#444";
+            ctx.fillRect(300,300,50,100);
+
+
+        })()
+    </script>
+</body>
+</html>

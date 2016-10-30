@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+    <script src="sprite.js"></script>
+</head>
+<body>
+<div>
+    <canvas id="canvas">
+
+    </canvas>
+    <button id="forward">前进</button>
+    <button id="left">向左</button>
+    <button id="right">向右</button>
+    <button id="back">后退</button>
+</div>
+<script>
+    var canvas = document.querySelector("#canvas");
+    canvas.style.border = '1px solid red';
+    canvas.width = 600;
+    canvas.height = 600;
+    var ctx = canvas.getContext('2d');
+    var forward = document.querySelector("#forward");
+    var left = document.querySelector('#left');
+    var right = document.querySelector('#right');
+    var back = document.querySelector('#back');
+    var spr = new Sprite({
+        imgSrc : '../gameImgs/DMMban.png',
+        sliceW : 40,
+        sliceH : 65,
+        x0 :300,
+        y0:300,
+        w:80,
+        h:130,
+        fps:5
+    })
+    spr.render(ctx);
+    forward.onclick = function () {
+        spr.changeDir('forward');
+    }
+    left.onclick = function () {
+        spr.changeDir('left');
+    }
+    right.onclick = function () {
+        spr.changeDir('right');
+    }
+    back.onclick = function () {
+        spr.changeDir('back');
+    }
+
+</script>
+</body>
+</html>

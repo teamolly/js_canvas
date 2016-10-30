@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas-table</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            margin: 100px 300px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="table">
+
+        </canvas>
+        <canvas id="tab">
+
+        </canvas>
+    </div>
+    <script>
+        (function () {
+              var canvas = document.getElementById('table');
+              canvas.style.border = '1px solid #e93232';
+              canvas.width = 600;
+              canvas.height = 600;
+              var ctx = canvas.getContext('2d');
+              var dis = 10;
+              for(var i=1; i<=canvas.width/dis;i++){
+                  ctx.moveTo(0,i*dis);
+                  ctx.lineTo(canvas.width,i*dis);
+
+                  ctx.moveTo(i*dis,0);
+                  ctx.lineTo(i*dis,canvas.height);
+                  ctx.lineWidth = 0.3;
+                  ctx.strokeStyle = 'rgba(45,45,45,0.3)';
+                  ctx.stroke();
+              }
+
+              ctx.beginPath();
+              ctx.moveTo(100,100);
+              ctx.lineTo(100,500);
+              ctx.lineTo(500,500);
+              ctx.moveTo(90,110);
+              ctx.lineTo(100,100);
+              ctx.lineTo(110,110);
+              ctx.moveTo(490,490);
+              ctx.lineTo(500,500);
+              ctx.lineTo(490,510);
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = '#0f3'; //这些样式是可以被后面继承的，因此需要配合beginPath()一起使用；
+              ctx.stroke();
+
+              ctx.beginPath(); //开启一个新状态；
+              ctx.moveTo(100,500);
+              ctx.lineTo(150,350);
+              ctx.lineTo(300,350);
+              ctx.lineTo(350,400);
+              ctx.lineTo(400,280);
+              ctx.lineTo(450,320);
+              ctx.lineTo(500,220);
+              ctx.lineWidth = 1.5;
+              ctx.strokeStyle = 'red';
+              ctx.stroke();
+
+
+//            r can = document.getElementById('tab');
+//            n.style.border = '1px solid #e93232';
+//            n.width = 600;
+//            n.height = 600;
+//            r cx = can.getContext('2d');
+
+
+        })();
+
+    </script>
+</body>
+</html>

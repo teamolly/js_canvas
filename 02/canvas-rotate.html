@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="canvas">
+
+    </canvas>
+</div>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        canvas.style.border = '1px solid red';
+        canvas.height = 600;
+        canvas.width = 600;
+        ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'red';
+        ctx.fillRect(10,10,100,100);
+        ctx.save();
+
+        ctx.translate(100,100);
+        ctx.rotate(Math.PI/4);
+        ctx.scale(2,2);
+
+        ctx.beginPath();
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(10,10,100,100);
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.fillRect(110,110,200,200);
+    })()
+</script>
+
+</body>
+</html>

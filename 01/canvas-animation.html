@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="animation">
+
+    </canvas>
+    <button id="forward">向前</button>
+    <button id="left">向左</button>
+    <button id="right">向右</button>
+    <button id="back">向后</button>
+
+</div>
+<script>
+    (function () {
+        var canvas = document.querySelector("#animation");
+        var ctx = canvas.getContext("2d");
+        canvas.style.border = '1px solid red';
+        canvas.width = 600;
+        canvas.height = 600;
+        var frameIndex = 0;
+        var img = new Image();
+        img.src = 'imgs/gameImgs/DMMban.png';
+        var forward = document.querySelector('#forward');
+        var left = document.querySelector('#left');
+        var right = document.querySelector('#right');
+        var back = document.querySelector('#back');
+        var timer = null;
+        img.onload = function () {
+            autoplay(0);
+            console.log(forward,left,right,back);
+            forward.addEventListener('click',function () {
+                autoplay(0);
+            });
+            left.addEventListener('click',function () {
+                autoplay(65);
+            });
+            right.addEventListener('click',function () {
+                autoplay(130);
+            });
+            back.addEventListener('click',function () {
+                autoplay(195);
+            });
+            function autoplay (y0) {
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.drawImage(img,frameIndex*40,y0,40,65,200,200,80,130);
+                    frameIndex ++;
+                    frameIndex = frameIndex % 4 ;
+                },200)
+            }
+        }
+
+    })()
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    (function () {
+        /*function Cat(){ //一般情况下，函数的原型对象为空，new关键字通过设置空对象，然后执行构造函数的方法，获取构造函数的属性和方法
+         this.age = 18;
+         this.show = function () {
+         console.log(this.name);//this它为一个对象上的方法的时候，this是当前这个对象。
+         }
+         this.name = "LLy";
+         }*/
+/*        function Cat(){ //在这种情况下，函数的原型对象就是后面添加的prototype属性，这种方法的好处是只保存一份方法，属性因为各不相同，所以一般都不进行设置；
+            this.age = 18;
+            this.name = "LLy";
+            Cat.prototype.show = function () {
+                console.log(this.name);
+            };
+        }*/
+        /*function Cat(json){
+            /!*this.age = json.age;
+            this.name = json.name;
+            this.show = function () {
+                console.log(this.name);
+            };*!/
+            return {
+                work:'zhang',
+                age:json.age,
+                name:json.name,
+                show: function () {
+                    console.log(json.name);
+                }
+            }
+        }
+        console.log(Cat.prototype);
+        var cat = new Cat({age:18,name:'zhangsan'});
+        var car = new Cat({age:21,name:'ggdd'});
+        console.log(cat.__proto__);
+        console.log(Cat.prototype === cat.__proto__);
+        console.log(cat.work,cat.age);
+        cat.show();*/
+        //在没有返回值的情况下：new生成一个新对象，构造函数的this指向这个对象，新对象的__proto__属性指向构造函数的prototype原型对象，这就是new生成的新对象（实例对象）可以调用构造函数的this属性和prototype方法的原因；函数原始的原型对象为一个约定的标准值，可视为无意义的空值。只有添加属性和方法之后，才变得有意义；
+        //有返回值的情况下，new生成的新对象直接获取return里面的属性和方法，直接调用，与前面的this无关；
+/*
+        function sat(){ //闭包函数保护内部变量
+            return function () {
+                console.log('good');
+            }
+        }
+
+        var obj = sat();
+        obj();
+*/
+        //面向对象最终版本
+        function Sprite(json){
+           this._init(json);
+        }
+        Sprite.prototype = {
+            _init: function (json) {
+                this.age = json.age;
+                this.name = json.name;
+            },
+            show: function () {
+              console.log(this.age);
+            }
+        }
+        var sprite = new Sprite({age:12.2,name:1025});
+        console.log(sprite.age);
+        console.log(sprite.name);
+        sprite.show();
+    })()
+</script>
+</body>
+</html>

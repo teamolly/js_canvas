@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas-drawImg</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            margin: 100px auto;
+        }
+    </style>
+    <script src="rect.js"></script>
+</head>
+<body>
+<div>
+    <canvas id="canvas_1">
+
+    </canvas>
+    <canvas id="canvas_2">
+
+    </canvas>
+</div>
+<script>
+    var canvas1 = document.querySelector("#canvas_1");
+    canvas1.style.border = '1px solid red';
+    canvas1.width = 600;
+    canvas1.height = 600;
+    var ctx1 = canvas1.getContext('2d');
+    var canvasHide = document.querySelector("#canvas_2");
+    canvasHide.width = canvas1.width;
+    canvasHide.height = canvas1.height;
+    var ctxHide = canvas1.getContext('2d');
+    var rec = new Rect({
+        x:100,y:100,
+        w:10,h:200
+    });
+    for(var i=0;i<10;i++){
+        rec.x += 10;
+        rec.render(ctxHide);
+    }
+
+
+
+
+</script>
+</body>
+</html>

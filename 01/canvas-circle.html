@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas-circle</title>
+</head>
+<body>
+    <div>
+        <canvas id="circle">
+
+        </canvas>
+    </div>
+    <script>
+        (function () {
+            var data = [{
+                "value": .2,
+                "color": "red",
+                "title": "应届生"
+            },{
+                "value": .3,
+                "color": "blue",
+                "title": "社会招生"
+            },{
+                "value": .4,
+                "color": "green",
+                "title": "老学员推荐"
+            },{
+                "value": .1,
+                "color": "#ccc",
+                "title": "公开课"
+            }];
+            var canvas = document.querySelector("#circle");
+            var ctx = canvas.getContext('2d');
+            canvas.style.border = '1px solid red';
+            canvas.width = 600;
+            canvas.height = 600;
+            var x0 = 300,y0 = 300, radius = 200;
+            var startAngle = -1/2*Math.PI;
+            for(var i=0;i<data.length;i++){
+                ctx.beginPath();
+                var valueText = data[i].value*100+'%';
+                ctx.moveTo(x0,y0);
+                var angle = data[i].value*2*Math.PI;
+                var endAngle = startAngle + angle;
+                ctx.arc(x0,y0,radius,startAngle,endAngle,false);
+                ctx.fillStyle = data[i].color;
+                var valueAngleX = x0 + Math.cos((startAngle + endAngle )/2)*(radius+20);
+                var valueAngleY = y0 + Math.sin((startAngle + endAngle )/2)*(radius+20);
+                ctx.strokeText(valueText,valueAngleX,valueAngleY);
+                ctx.font ='20px/2.5 "微软雅黑"';
+                if(((startAngle + endAngle )/2 > (1/2*Math.PI)) && ((startAngle + endAngle )/2 < (3/2*Math.PI))){
+                    ctx.textAlign = "end";
+                }
+                ctx.fill();
+                ctx.stroke();
+                startAngle += angle;
+
+            }
+        })()
+    </script>
+</body>
+</html>
